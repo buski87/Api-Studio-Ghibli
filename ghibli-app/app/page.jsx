@@ -6,6 +6,7 @@ import FilmCard from "@/components/FilmCard";
 import Pagination from "@/components/Pagination";
 import SearchBar from "@/components/SearchBar";
 import FilterBar from "@/components/FilterBar";
+import LoadingSpinner from "@/components/LoadingSpinner";
 
 const FILMS_PER_PAGE = 6;
 
@@ -13,9 +14,9 @@ export default function Home({ searchParams }) {
   const [allFilms, setAllFilms] = useState([]);
   const [filteredFilms, setFilteredFilms] = useState([]);
   const [filters, setFilters] = useState({ search: "", director: "", year: "" });
-
   const [availableDirectors, setAvailableDirectors] = useState([]);
   const [availableYears, setAvailableYears] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const page = parseInt(searchParams?.page || "1", 10);
 
@@ -27,13 +28,22 @@ export default function Home({ searchParams }) {
 
       setAllFilms(combined);
       setFilteredFilms(combined);
+      const uniqueYears = [
+        ...new Set(
+          combined
+            .map((f) => f.release_date || f.year)
+            .filter((year) => year && year !== "")
+        ),
+      ].sort();
 
-      // Filtros únicos dinámicos
-      const uniqueDirectors = [...new Set(combined.map(f => f.director))].sort();
-      const uniqueYears = [...new Set(combined.map(f => f.release_date || f.year))].sort();
+      const uniqueDirectors = [
+        ...new Set(combined.map((f) => f.director).filter(Boolean)),
+      ].sort();
 
       setAvailableDirectors(uniqueDirectors);
       setAvailableYears(uniqueYears);
+
+      setLoading(false);
     };
 
     loadFilms();
@@ -51,7 +61,9 @@ export default function Home({ searchParams }) {
       result = result.filter((film) => film.director === filters.director);
     }
     if (filters.year) {
-      result = result.filter((film) => (film.release_date || film.year) === filters.year);
+      result = result.filter(
+        (film) => (film.release_date || film.year) === filters.year
+      );
     }
 
     setFilteredFilms(result);
@@ -64,24 +76,34 @@ export default function Home({ searchParams }) {
 
   return (
     <div className="p-6 max-w-7xl mx-auto">
-      <SearchBar onSearch={(search) => setFilters((prev) => ({ ...prev, search }))} />
-      <FilterBar
-        onFilter={setFilters}
-        directors={availableDirectors}
-        years={availableYears}
-      />
-
-      {filmsToShow.length === 0 ? (
-        <p className="text-center text-gray-500">No se encontraron películas.</p>
+      {loading ? (
+        <LoadingSpinner />
       ) : (
         <>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filmsToShow.map((film) => (
-              <FilmCard key={film.id} film={film} />
-            ))}
-          </div>
+          <SearchBar
+            onSearch={(search) => setFilters((prev) => ({ ...prev, search }))}
+          />
+          <FilterBar
+            onFilter={setFilters}
+            directors={availableDirectors}
+            years={availableYears}
+          />
 
-          <Pagination currentPage={page} totalPages={totalPages} />
+          {filmsToShow.length === 0 ? (
+            <p className="text-center text-gray-500">
+              No se encontraron películas.
+            </p>
+          ) : (
+            <>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {filmsToShow.map((film) => (
+                  <FilmCard key={film.id} film={film} />
+                ))}
+              </div>
+
+              <Pagination currentPage={page} totalPages={totalPages} />
+            </>
+          )}
         </>
       )}
     </div>
