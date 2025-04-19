@@ -24,7 +24,11 @@ export default function Home({ searchParams }) {
     const loadFilms = async () => {
       const apiFilms = await getAllFilms();
       const localFilms = JSON.parse(localStorage.getItem("ghibli_films")) || [];
-      const combined = [...localFilms, ...apiFilms];
+      const combined = [...localFilms, ...apiFilms].sort((a, b) => {
+        const yearA = parseInt(a.release_date || a.year, 10);
+        const yearB = parseInt(b.release_date || b.year, 10);
+        return yearA - yearB; 
+      });
 
       setAllFilms(combined);
       setFilteredFilms(combined);
