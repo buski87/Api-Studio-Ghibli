@@ -6,6 +6,14 @@ import FilmCard from '@/components/FilmCard';
 export default function MisPeliculasPage() {
   const [films, setFilms] = useState([]);
   const [editing, setEditing] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const FILMS_PER_PAGE = 6;
+  const totalPages = Math.ceil(films.length / FILMS_PER_PAGE);
+  const paginatedFilms = films.slice(
+    (currentPage - 1) * FILMS_PER_PAGE,
+    currentPage * FILMS_PER_PAGE
+  );
 
   useEffect(() => {
     const stored = JSON.parse(localStorage.getItem('ghibli_films')) || [];
@@ -84,17 +92,35 @@ export default function MisPeliculasPage() {
       {films.length === 0 ? (
         <p className="text-center text-gray-400">No has añadido ninguna película aún.</p>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          {films.map((film) => (
-            <FilmCard
-              key={film.id}
-              film={film}
-              editable
-              onEdit={handleEdit}
-              onDelete={handleDelete}
-            />
-          ))}
-        </div>
+        <>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            {paginatedFilms.map((film) => (
+              <FilmCard
+                key={film.id}
+                film={film}
+                editable
+                onEdit={handleEdit}
+                onDelete={handleDelete}
+              />
+            ))}
+          </div>
+
+          {films.length > 0 && (
+            <div className="flex justify-center mt-8 gap-2">
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                <button
+                  key={page}
+                  onClick={() => setCurrentPage(page)}
+                  className={`px-3 py-1 rounded ${
+                    currentPage === page ? 'bg-yellow-400 text-black font-bold' : 'bg-gray-700 text-white'
+                  } hover:bg-yellow-300 transition`}
+                >
+                  {page}
+                </button>
+              ))}
+            </div>
+          )}
+        </>
       )}
     </main>
   );

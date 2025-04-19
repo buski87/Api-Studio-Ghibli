@@ -14,13 +14,29 @@ export default function Home({ searchParams }) {
   const [filteredFilms, setFilteredFilms] = useState([]);
   const [filters, setFilters] = useState({ search: "", director: "", year: "" });
 
+  const [availableDirectors, setAvailableDirectors] = useState([]);
+  const [availableYears, setAvailableYears] = useState([]);
+
   const page = parseInt(searchParams?.page || "1", 10);
 
   useEffect(() => {
-    getAllFilms().then((data) => {
-      setAllFilms(data);
-      setFilteredFilms(data);
-    });
+    const loadFilms = async () => {
+      const apiFilms = await getAllFilms();
+      const localFilms = JSON.parse(localStorage.getItem("ghibli_films")) || [];
+      const combined = [...localFilms, ...apiFilms];
+
+      setAllFilms(combined);
+      setFilteredFilms(combined);
+
+      // Filtros únicos dinámicos
+      const uniqueDirectors = [...new Set(combined.map(f => f.director))].sort();
+      const uniqueYears = [...new Set(combined.map(f => f.release_date || f.year))].sort();
+
+      setAvailableDirectors(uniqueDirectors);
+      setAvailableYears(uniqueYears);
+    };
+
+    loadFilms();
   }, []);
 
   useEffect(() => {
@@ -35,7 +51,7 @@ export default function Home({ searchParams }) {
       result = result.filter((film) => film.director === filters.director);
     }
     if (filters.year) {
-      result = result.filter((film) => film.release_date === filters.year);
+      result = result.filter((film) => (film.release_date || film.year) === filters.year);
     }
 
     setFilteredFilms(result);
@@ -49,7 +65,11 @@ export default function Home({ searchParams }) {
   return (
     <div className="p-6 max-w-7xl mx-auto">
       <SearchBar onSearch={(search) => setFilters((prev) => ({ ...prev, search }))} />
-      <FilterBar onFilter={setFilters} />
+      <FilterBar
+        onFilter={setFilters}
+        directors={availableDirectors}
+        years={availableYears}
+      />
 
       {filmsToShow.length === 0 ? (
         <p className="text-center text-gray-500">No se encontraron películas.</p>

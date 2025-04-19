@@ -12,6 +12,7 @@ export default function Header() {
           <Link href="/" className="hover:text-yellow-400 transition">Inicio</Link>
           <Link href="/form" className="hover:text-yellow-400 transition">Añadir Película</Link>
           <Link href="/films" className="hover:text-yellow-400 transition">Mis Películas</Link>
+          <Link href="/faqs" className="text-yellow-400 hover:underline">FAQS</Link>
         </nav>
       </div>
     </header>
