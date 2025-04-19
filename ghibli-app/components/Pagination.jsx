@@ -14,8 +14,8 @@ export default function Pagination({ currentPage, totalPages }) {
             href={`/?page=${pageNum}`}
             className={`px-4 py-2 rounded text-sm ${
               currentPage === pageNum
-                ? "bg-blue-600 text-white"
-                : "bg-gray-200 hover:bg-gray-300"
+                ? "bg-yellow-400 text-black font-semibold px-4 py-2 rounded hover:bg-yellow-300 transition"
+                : "bg-yellow-400 text-black font-semibold px-4 py-2 rounded hover:bg-yellow-300 transition"
             }`}
           >
             {pageNum}

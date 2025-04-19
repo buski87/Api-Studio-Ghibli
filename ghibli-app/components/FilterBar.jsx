@@ -6,24 +6,19 @@ export default function FilterBar({ onFilter }) {
     onFilter((prev) => ({ ...prev, [name]: value }));
   };
 
+  const inputClasses =
+    "p-2 border rounded bg-white dark:bg-gray-900 dark:border-gray-700 text-sm text-black dark:text-white";
+
   return (
     <div className="flex flex-wrap gap-4 mb-6">
-      <select
-        name="director"
-        onChange={handleChange}
-        className="p-2 border rounded bg-white dark:bg-gray-900 dark:border-gray-700 text-sm"
-      >
+      <select name="director" onChange={handleChange} className={inputClasses}>
         <option value="">Todos los directores</option>
         <option value="Hayao Miyazaki">Hayao Miyazaki</option>
         <option value="Isao Takahata">Isao Takahata</option>
         <option value="Gorō Miyazaki">Gorō Miyazaki</option>
       </select>
 
-      <select
-        name="year"
-        onChange={handleChange}
-        className="p-2 border rounded bg-white dark:bg-gray-900 dark:border-gray-700 text-sm"
-      >
+      <select name="year" onChange={handleChange} className={inputClasses}>
         <option value="">Todos los años</option>
         <option value="1986">1986</option>
         <option value="1988">1988</option>

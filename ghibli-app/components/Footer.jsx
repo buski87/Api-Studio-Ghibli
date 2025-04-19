@@ -1,7 +1,7 @@
 export default function Footer() {
     return (
-      <footer className="bg-gray-100 dark:bg-gray-900 text-center text-sm py-4 mt-12 text-gray-600 dark:text-gray-400">
-        Studio Ghibli - Buski87 &copy; {new Date().getFullYear()}
+      <footer className="bg-black border-t-4 border-yellow-500 text-center py-4 text-yellow-400 text-sm font-medium">
+        Studio Ghibli Films - Buski87 &copy; {new Date().getFullYear()}
       </footer>
     );
   }

@@ -1,6 +1,9 @@
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { Noto_Serif_JP } from "next/font/google";
+
+const japaneseFont = Noto_Serif_JP({ subsets: ["latin"], weight: "500" });
 
 export const metadata = {
   title: "Studio Ghibli Explorer",
@@ -10,7 +13,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="es">
-      <body className="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+     <body className={`${japaneseFont.className} bg-gray-900 text-white`}>
         <Header />
         <main className="min-h-screen">{children}</main>
         <Footer />
