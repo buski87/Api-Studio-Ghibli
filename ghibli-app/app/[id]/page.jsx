@@ -11,7 +11,6 @@ export default function FilmDetailPage({ params }) {
   useEffect(() => {
     const fetchData = async () => {
       const data = await getFilmById(params.id);
-
       if (data) {
         setFilm(data);
       } else {
@@ -20,7 +19,6 @@ export default function FilmDetailPage({ params }) {
         setFilm(localFilm || null);
       }
     };
-
     fetchData();
   }, [params.id]);
 
@@ -36,12 +34,12 @@ export default function FilmDetailPage({ params }) {
   }
 
   return (
-    <main className="w-full min-h-screen text-white p-6 flex justify-center items-start">
+    <main className="w-full min-h-screen  text-white p-4 sm:p-6 flex justify-center items-start">
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="w-full max-w-5xl bg-[#121f30] text-white rounded-xl shadow-2xl border border-[#2d74da] overflow-hidden flex flex-col md:flex-row"
+        className="w-full max-w-5xl bg-[#121f30] rounded-xl shadow-2xl border border-[#2d74da] overflow-hidden flex flex-col md:flex-row"
       >
         <img
           src={film.image}
@@ -49,9 +47,9 @@ export default function FilmDetailPage({ params }) {
           className="w-full md:w-1/2 h-64 md:h-auto object-cover"
         />
 
-        <div className="flex flex-col justify-between p-6 md:w-1/2">
-          <div className="space-y-3">
-            <h1 className="text-3xl font-extrabold tracking-widest uppercase text-[#50b4ff]">
+        <div className="flex flex-col justify-between p-4 sm:p-6 md:w-1/2">
+          <div className="space-y-4">
+            <h1 className="text-3xl sm:text-4xl font-extrabold tracking-widest uppercase text-[#50b4ff]">
               {film.title}
             </h1>
             <p className="text-sm italic text-gray-300">
@@ -65,7 +63,7 @@ export default function FilmDetailPage({ params }) {
             </p>
           </div>
 
-          <div className="mt-6 flex justify-center">
+          <div className="mt-6 flex justify-center md:justify-start">
             <Link
               href="/"
               className="bg-[#50b4ff] text-black px-5 py-2 rounded-lg font-semibold hover:bg-[#7ecfff] transition text-sm"

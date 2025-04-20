@@ -13,7 +13,7 @@ export default function Header() {
           href="/"
           className="text-2xl font-bold tracking-widest uppercase text-white flex items-center gap-2"
         >
-          <span className="text-3xl">🎥</span> Ghibli Stream
+          <span className="text-3xl">🎬</span> Ghibli Films
         </Link>
 
         <button

@@ -1,15 +1,21 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useSearchParams, useRouter, usePathname } from 'next/navigation';
 import FilmCard from '@/components/FilmCard';
 import Pagination from '@/components/Pagination';
 
 export default function MisPeliculasPage() {
   const [films, setFilms] = useState([]);
   const [editing, setEditing] = useState(null);
-  const [currentPage, setCurrentPage] = useState(1);
 
   const FILMS_PER_PAGE = 6;
+
+  const searchParams = useSearchParams();
+  const currentPage = parseInt(searchParams.get("page") || "1", 10);
+  const router = useRouter();
+  const pathname = usePathname();
+
   const totalPages = Math.ceil(films.length / FILMS_PER_PAGE);
   const paginatedFilms = films.slice(
     (currentPage - 1) * FILMS_PER_PAGE,
@@ -38,8 +44,14 @@ export default function MisPeliculasPage() {
     setEditing(null);
   };
 
+  const handlePageChange = (pageNum) => {
+    const params = new URLSearchParams(searchParams);
+    params.set("page", pageNum);
+    router.push(`${pathname}?${params.toString()}`);
+  };
+
   return (
-    <main className="min-h-screen text-white px-4 py-12">
+    <main className="min-h-screen text-white px-4 py-12 bg-gradient-to-r from-[#0f2027] via-[#203a43] to-[#2c5364]">
       <h1 className="text-4xl font-extrabold text-white mb-10 text-center uppercase tracking-wider">
         Mis Películas
       </h1>
@@ -80,7 +92,7 @@ export default function MisPeliculasPage() {
               onChange={(e) => setEditing({ ...editing, image: e.target.value })}
               placeholder="URL de imagen"
             />
-            <div className="flex gap-4 justify-end mt-4">
+            <div className="flex flex-col sm:flex-row gap-4 justify-end mt-4">
               <button
                 onClick={handleSaveEdit}
                 className="bg-[#50b4ff] text-black px-6 py-2 rounded-lg font-semibold hover:bg-[#7ecfff] transition"
@@ -120,7 +132,7 @@ export default function MisPeliculasPage() {
             <Pagination
               currentPage={currentPage}
               totalPages={totalPages}
-              onPageChange={setCurrentPage}
+              onPageChange={handlePageChange}
             />
           )}
         </>

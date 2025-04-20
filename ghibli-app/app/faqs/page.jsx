@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { ChevronDownIcon } from '@heroicons/react/24/outline'; // Asegúrate de instalar este paquete
+import FaqsElement from '@/components/FaqsElement';
 
 const faqs = [
   {
@@ -17,7 +17,7 @@ const faqs = [
   {
     question: '¿Qué pasa si pongo mal el año o duración?',
     answer:
-      'Los campos de año y duración deben ser números. Si introduces letras u otros símbolos, no se guardará correctamente. Usa sólo valores numéricos.',
+      'Los campos de año y duración deben ser numéricos. Si introduces letras u otros símbolos, no se guardarán correctamente. Usa solo valores numéricos. Igualmente, una vez creada la película, podrás editar los datos en la página de Mis Películas en caso de error.',
   },
   {
     question: '¿Se guardan las películas que creo permanentemente?',
@@ -47,32 +47,14 @@ export default function FAQsPage() {
 
         <div className="space-y-4">
           {faqs.map((faq, index) => (
-            <div
+            <FaqsElement
               key={index}
-              className="rounded-lg bg-[#121f30] border border-[#50b4ff] shadow-lg transition"
-            >
-              <button
-                onClick={() => toggle(index)}
-                className="w-full flex justify-between items-center px-6 py-5 text-left text-lg font-semibold text-white hover:bg-[#1a2e46] rounded-t-lg transition"
-              >
-                <span className="pr-4">{faq.question}</span>
-                <ChevronDownIcon
-                  className={`h-5 w-5 text-[#50b4ff] transform transition-transform duration-300 ${
-                    openIndex === index ? 'rotate-180' : ''
-                  }`}
-                />
-              </button>
-
-              <div
-                className={`px-6 pt-0 overflow-hidden text-gray-300 text-sm transition-all duration-300 ease-in-out ${
-                  openIndex === index ? 'max-h-96 pb-5' : 'max-h-0 pb-0'
-                }`}
-              >
-                {openIndex === index && (
-                  <p className="leading-relaxed">{faq.answer}</p>
-                )}
-              </div>
-            </div>
+              index={index}
+              isOpen={openIndex === index}
+              onToggle={toggle}
+              question={faq.question}
+              answer={faq.answer}
+            />
           ))}
         </div>
       </div>

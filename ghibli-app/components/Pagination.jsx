@@ -1,6 +1,10 @@
+import { usePathname, useSearchParams } from "next/navigation";
 import Link from "next/link";
 
 export default function Pagination({ currentPage, totalPages }) {
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
   if (totalPages <= 1) return null;
 
   return (
@@ -9,10 +13,13 @@ export default function Pagination({ currentPage, totalPages }) {
         const pageNum = i + 1;
         const isActive = currentPage === pageNum;
 
+        const params = new URLSearchParams(searchParams);
+        params.set("page", pageNum);
+
         return (
           <Link
             key={pageNum}
-            href={`/?page=${pageNum}`}
+            href={`${pathname}?${params.toString()}`}
             className={`px-4 py-2 rounded-full text-sm font-bold transition duration-300 ${
               isActive
                 ? "bg-cyan-400 text-black border-2 border-cyan-500 shadow-lg scale-105"
