@@ -6,6 +6,14 @@ import Link from "next/link";
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
 
+  const navLinks = [
+    { href: "/", label: "Inicio" },
+    { href: "/films", label: "Películas" },
+    { href: "/form", label: "Añadir Película" },
+    { href: "/collection", label: "Mis Películas" },
+    { href: "/faqs", label: "FAQS", highlight: true },
+  ];
+
   return (
     <header className="bg-gradient-to-r from-[#0f2027] via-[#203a43] to-[#2c5364] text-white shadow-md">
       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
@@ -31,15 +39,11 @@ export default function Header() {
               : "hidden sm:flex"
           }`}
         >
-          {[
-            { href: "/", label: "Inicio" },
-            { href: "/form", label: "Añadir Película" },
-            { href: "/films", label: "Mis Películas" },
-            { href: "/faqs", label: "FAQS", highlight: true },
-          ].map(({ href, label, highlight }) => (
+          {navLinks.map(({ href, label, highlight }) => (
             <Link
               key={href}
               href={href}
+              onClick={() => setIsOpen(false)} // ✅ Cierra el menú al hacer clic
               className={`block py-2 relative hover:text-cyan-300 transition ${
                 highlight ? "text-cyan-400" : "text-white"
               }`}

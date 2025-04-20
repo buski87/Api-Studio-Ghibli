@@ -26,8 +26,8 @@ export default function FilmDetailPage({ params }) {
     return (
       <div className="p-10 text-center bg-gradient-to-b from-[#1f1f1f] via-[#141414] to-[#1f1f1f] min-h-screen text-white">
         <h2 className="text-2xl font-bold text-red-500">Película no encontrada</h2>
-        <Link href="/" className="mt-4 inline-block text-[#50b4ff] underline hover:text-[#7ecfff] transition">
-          ← Volver al inicio
+        <Link href="/films" className="mt-4 inline-block text-[#50b4ff] underline hover:text-[#7ecfff] transition">
+          ← Volver
         </Link>
       </div>
     );
