@@ -7,37 +7,46 @@ export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className="bg-black border-b-4 border-yellow-500 text-white shadow-lg">
+    <header className="bg-gradient-to-r from-[#0f2027] via-[#203a43] to-[#2c5364] text-white shadow-md">
       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
         <Link
           href="/"
-          className="text-2xl font-extrabold tracking-wide uppercase text-yellow-400"
+          className="text-2xl font-bold tracking-widest uppercase text-white flex items-center gap-2"
         >
-          🎬 Ghibli Films
+          <span className="text-3xl">🎥</span> Ghibli Stream
         </Link>
 
-
         <button
-          className="sm:hidden text-yellow-400 text-2xl focus:outline-none"
+          className="sm:hidden text-white text-3xl focus:outline-none"
           onClick={() => setIsOpen(!isOpen)}
           aria-label="Toggle menu"
         >
           {isOpen ? "✖" : "☰"}
         </button>
-        
-        <nav className={`sm:flex gap-4 text-sm font-semibold ${isOpen ? "block" : "hidden"} absolute sm:static top-[70px] left-0 w-full sm:w-auto bg-black sm:bg-transparent px-6 sm:px-0 pb-4 sm:pb-0 z-50`}>
-          <Link href="/" className="block py-1 hover:text-yellow-400 transition">
-            Inicio
-          </Link>
-          <Link href="/form" className="block py-1 hover:text-yellow-400 transition">
-            Añadir Película
-          </Link>
-          <Link href="/films" className="block py-1 hover:text-yellow-400 transition">
-            Mis Películas
-          </Link>
-          <Link href="/faqs" className="block py-1 text-yellow-400 hover:underline">
-            FAQS
-          </Link>
+
+        <nav
+          className={`sm:flex sm:items-center gap-6 text-sm font-medium transition-all duration-300 ease-in-out ${
+            isOpen
+              ? "block absolute top-[70px] left-0 w-full bg-[#1a1a1a] sm:bg-transparent px-6 pb-4 z-50"
+              : "hidden sm:flex"
+          }`}
+        >
+          {[
+            { href: "/", label: "Inicio" },
+            { href: "/form", label: "Añadir Película" },
+            { href: "/films", label: "Mis Películas" },
+            { href: "/faqs", label: "FAQS", highlight: true },
+          ].map(({ href, label, highlight }) => (
+            <Link
+              key={href}
+              href={href}
+              className={`block py-2 relative hover:text-cyan-300 transition ${
+                highlight ? "text-cyan-400" : "text-white"
+              }`}
+            >
+              <span className="hover-underline">{label}</span>
+            </Link>
+          ))}
         </nav>
       </div>
     </header>

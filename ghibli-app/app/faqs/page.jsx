@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { ChevronDownIcon } from '@heroicons/react/24/outline'; // Asegúrate de instalar este paquete
 
 const faqs = [
   {
@@ -26,7 +27,7 @@ const faqs = [
   {
     question: '¿Qué formato debe tener la URL de la imagen y dónde se guarda?',
     answer:
-      'El formato correcto para la URL de la imagen es: `/images/mi-imagen.png`. Debes colocar el archivo de imagen dentro de la carpeta `public/images` de tu proyecto. Por ejemplo, si subes una imagen llamada `chico-programando.png` dentro de `public/images`, puedes usar `/images/chico-programando.png` como URL en el formulario.',
+      'El formato correcto para la URL de la imagen es: `/images/mi-imagen.png`. Debes colocar el archivo de imagen dentro de la carpeta `public/images` de tu proyecto.',
   },
 ];
 
@@ -38,34 +39,42 @@ export default function FAQsPage() {
   };
 
   return (
-    <main className="min-h-screen bg-gray-900 text-white p-6 max-w-3xl mx-auto">
-      <h1 className="text-3xl font-bold text-yellow-400 mb-8 text-center uppercase">
-        Preguntas Frecuentes (FAQs)
-      </h1>
+    <main className="min-h-screen bg-gradient-to-r from-[#0f2027] via-[#203a43] to-[#2c5364] text-white px-4 py-16">
+      <div className="max-w-4xl mx-auto">
+        <h1 className="text-4xl font-extrabold text-[#50b4ff] mb-12 text-center uppercase tracking-wide">
+          Preguntas Frecuentes
+        </h1>
 
-      <div className="space-y-4">
-        {faqs.map((faq, index) => (
-          <div
-            key={index}
-            className="border-4 border-yellow-500 rounded-xl overflow-hidden bg-black"
-          >
-            <button
-              onClick={() => toggle(index)}
-              className="w-full flex justify-between items-center p-4 text-left text-lg font-semibold uppercase hover:bg-yellow-500 hover:text-black transition"
+        <div className="space-y-4">
+          {faqs.map((faq, index) => (
+            <div
+              key={index}
+              className="rounded-lg bg-[#121f30] border border-[#50b4ff] shadow-lg transition"
             >
-              {faq.question}
-              <span className="text-2xl">
-                {openIndex === index ? '−' : '+'}
-              </span>
-            </button>
+              <button
+                onClick={() => toggle(index)}
+                className="w-full flex justify-between items-center px-6 py-5 text-left text-lg font-semibold text-white hover:bg-[#1a2e46] rounded-t-lg transition"
+              >
+                <span className="pr-4">{faq.question}</span>
+                <ChevronDownIcon
+                  className={`h-5 w-5 text-[#50b4ff] transform transition-transform duration-300 ${
+                    openIndex === index ? 'rotate-180' : ''
+                  }`}
+                />
+              </button>
 
-            {openIndex === index && (
-              <div className="p-4 pt-0 text-sm text-gray-300 leading-relaxed">
-                {faq.answer}
+              <div
+                className={`px-6 pt-0 overflow-hidden text-gray-300 text-sm transition-all duration-300 ease-in-out ${
+                  openIndex === index ? 'max-h-96 pb-5' : 'max-h-0 pb-0'
+                }`}
+              >
+                {openIndex === index && (
+                  <p className="leading-relaxed">{faq.answer}</p>
+                )}
               </div>
-            )}
-          </div>
-        ))}
+            </div>
+          ))}
+        </div>
       </div>
     </main>
   );

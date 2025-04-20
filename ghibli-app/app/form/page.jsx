@@ -37,8 +37,6 @@ export default function NewFilmPage() {
     localStorage.setItem("ghibli_films", JSON.stringify(updatedFilms));
 
     alert("Película guardada correctamente en localStorage.");
-    console.log("Película añadida:", newFilm);
-
     setForm({
       title: '',
       director: '',
@@ -51,103 +49,103 @@ export default function NewFilmPage() {
   };
 
   return (
-    <main className="min-h-screen bg-gray-900 text-white flex justify-center items-start p-6">
-      <div className="w-full max-w-3xl bg-black border-4 border-yellow-500 rounded-xl shadow-lg p-6">
-        <h1 className="text-2xl font-bold uppercase text-yellow-400 mb-6 text-center">
+    <main className="min-h-screen text-white px-4 py-12 flex justify-center items-start">
+      <div className="w-full max-w-3xl bg-[#121f30] border border-[#2d74da] rounded-xl shadow-2xl p-8">
+        <h1 className="text-3xl font-extrabold text-[#50b4ff] mb-8 text-center uppercase tracking-wide">
           Añadir nueva película
         </h1>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-5">
           <div className="flex flex-col">
-            <label className="mb-1 text-sm">Título *</label>
+            <label className="mb-1 text-sm font-semibold text-gray-300">Título *</label>
             <input
               name="title"
               value={form.title}
               onChange={handleChange}
-              className="p-2 rounded bg-white text-black"
+              className="p-3 rounded-lg bg-[#0f2a40] text-white border border-[#50b4ff] focus:outline-none focus:ring-2 focus:ring-[#50b4ff]"
               required
             />
           </div>
 
           <div className="flex flex-col">
-            <label className="mb-1 text-sm">Director *</label>
+            <label className="mb-1 text-sm font-semibold text-gray-300">Director *</label>
             <input
               name="director"
               value={form.director}
               onChange={handleChange}
-              className="p-2 rounded bg-white text-black"
+              className="p-3 rounded-lg bg-[#0f2a40] text-white border border-[#50b4ff]"
               required
             />
           </div>
 
           <div className="flex flex-col md:flex-row md:gap-4">
             <div className="flex flex-col flex-1">
-              <label className="mb-1 text-sm">Año *</label>
+              <label className="mb-1 text-sm font-semibold text-gray-300">Año *</label>
               <input
                 name="year"
                 type="number"
                 value={form.year}
                 onChange={handleChange}
-                className="p-2 rounded bg-white text-black w-full"
+                className="p-3 rounded-lg bg-[#0f2a40] text-white border border-[#50b4ff] w-full"
                 required
               />
             </div>
             <div className="flex flex-col flex-1">
-              <label className="mb-1 text-sm">Duración (min)</label>
+              <label className="mb-1 text-sm font-semibold text-gray-300">Duración (min)</label>
               <input
                 name="duration"
                 type="number"
                 value={form.duration}
                 onChange={handleChange}
-                className="p-2 rounded bg-white text-black w-full"
+                className="p-3 rounded-lg bg-[#0f2a40] text-white border border-[#50b4ff] w-full"
               />
             </div>
             <div className="flex flex-col flex-1">
-              <label className="mb-1 text-sm">Rotten Score</label>
+              <label className="mb-1 text-sm font-semibold text-gray-300">Rotten Score</label>
               <input
                 name="rt_score"
                 type="number"
                 value={form.rt_score}
                 onChange={handleChange}
-                className="p-2 rounded bg-white text-black w-full"
+                className="p-3 rounded-lg bg-[#0f2a40] text-white border border-[#50b4ff] w-full"
               />
             </div>
           </div>
 
           <div className="flex flex-col">
-            <label className="mb-1 text-sm">Descripción *</label>
+            <label className="mb-1 text-sm font-semibold text-gray-300">Descripción *</label>
             <textarea
               name="description"
               value={form.description}
               onChange={handleChange}
               rows={4}
-              className="p-2 rounded bg-white text-black"
+              className="p-3 rounded-lg bg-[#0f2a40] text-white border border-[#50b4ff]"
               required
             ></textarea>
           </div>
 
           <div className="flex flex-col">
-            <label className="mb-1 text-sm">URL de imagen (opcional)</label>
+            <label className="mb-1 text-sm font-semibold text-gray-300">URL de imagen (opcional)</label>
             <input
               name="image"
               value={form.image}
               onChange={handleChange}
-              className="p-2 rounded bg-white text-black"
+              className="p-3 rounded-lg bg-[#0f2a40] text-white border border-[#50b4ff]"
             />
           </div>
 
-          <div className="flex justify-center mt-6">
+          <div className="flex justify-center mt-8">
             <button
               type="submit"
-              className="bg-yellow-400 text-black font-bold px-6 py-2 rounded hover:bg-yellow-300 transition"
+              className="bg-[#50b4ff] text-black font-bold px-6 py-3 rounded-lg hover:bg-[#7ecfff] transition"
             >
               Añadir película
             </button>
           </div>
         </form>
 
-        <div className="mt-4 text-center">
-          <Link href="/" className="text-yellow-400 hover:underline text-sm">
+        <div className="mt-6 text-center">
+          <Link href="/" className="text-[#50b4ff] hover:underline text-sm">
             ← Volver al inicio
           </Link>
         </div>

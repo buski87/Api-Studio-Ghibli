@@ -26,6 +26,20 @@ body {
   }
 }
 
+.hover-underline::after {
+  content: "";
+  display: block;
+  width: 0;
+  height: 2px;
+  background: #22d3ee; /* cyan-400 */
+  transition: width 0.3s;
+}
+
+.hover-underline:hover::after {
+  width: 100%;
+}
+
+
 /* styles/flipcard.css */
 .flip-card {
   perspective: 1000px;

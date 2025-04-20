@@ -15,7 +15,6 @@ export default function FilmDetailPage({ params }) {
       if (data) {
         setFilm(data);
       } else {
-        // Buscar en localStorage si no se encuentra en la API
         const localFilms = JSON.parse(localStorage.getItem("ghibli_films")) || [];
         const localFilm = localFilms.find((f) => f.id === params.id);
         setFilm(localFilm || null);
@@ -27,9 +26,9 @@ export default function FilmDetailPage({ params }) {
 
   if (!film) {
     return (
-      <div className="p-8 text-center">
-        <h2 className="text-2xl font-bold text-red-600">Película no encontrada</h2>
-        <Link href="/" className="text-yellow-400 underline block mt-4">
+      <div className="p-10 text-center bg-gradient-to-b from-[#1f1f1f] via-[#141414] to-[#1f1f1f] min-h-screen text-white">
+        <h2 className="text-2xl font-bold text-red-500">Película no encontrada</h2>
+        <Link href="/" className="mt-4 inline-block text-[#50b4ff] underline hover:text-[#7ecfff] transition">
           ← Volver al inicio
         </Link>
       </div>
@@ -37,31 +36,31 @@ export default function FilmDetailPage({ params }) {
   }
 
   return (
-    <main className="w-full min-h-screen flex justify-center items-start bg-gray-900 p-4 overflow-y-auto">
+    <main className="w-full min-h-screen text-white p-6 flex justify-center items-start">
       <motion.div
-        initial={{ opacity: 0, y: 50 }}
+        initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-        className="w-full max-w-5xl md:h-[80vh] bg-black text-white rounded-xl shadow-2xl border-4 border-yellow-500 overflow-hidden flex flex-col md:flex-row"
+        transition={{ duration: 0.5 }}
+        className="w-full max-w-5xl bg-[#121f30] text-white rounded-xl shadow-2xl border border-[#2d74da] overflow-hidden flex flex-col md:flex-row"
       >
         <img
           src={film.image}
           alt={film.title}
-          className="w-full md:w-1/2 h-60 md:h-full object-cover"
+          className="w-full md:w-1/2 h-64 md:h-auto object-cover"
         />
 
-        <div className="flex flex-col justify-between p-4 md:p-6 md:w-1/2">
+        <div className="flex flex-col justify-between p-6 md:w-1/2">
           <div className="space-y-3">
-            <h1 className="text-xl md:text-2xl font-extrabold tracking-wider uppercase">
+            <h1 className="text-3xl font-extrabold tracking-widest uppercase text-[#50b4ff]">
               {film.title}
             </h1>
-            <p className="text-xs md:text-sm italic text-gray-300">
+            <p className="text-sm italic text-gray-300">
               Dirigida por {film.director} · Productor: {film.producer || "N/D"} · Año {film.release_date || film.year}
             </p>
-            <p className="text-sm text-gray-200 leading-relaxed">
+            <p className="text-gray-200 text-sm leading-relaxed">
               {film.description}
             </p>
-            <p className="text-xs text-gray-400">
+            <p className="text-xs text-gray-400 mt-2">
               ⏱️ {film.running_time || film.duration || "N/D"} min · 🍅 Rotten Score: {film.rt_score || "N/D"}/100
             </p>
           </div>
@@ -69,7 +68,7 @@ export default function FilmDetailPage({ params }) {
           <div className="mt-6 flex justify-center">
             <Link
               href="/"
-              className="bg-yellow-400 text-black px-4 py-2 rounded font-semibold hover:bg-yellow-300 transition text-sm"
+              className="bg-[#50b4ff] text-black px-5 py-2 rounded-lg font-semibold hover:bg-[#7ecfff] transition text-sm"
             >
               ← Volver al inicio
             </Link>

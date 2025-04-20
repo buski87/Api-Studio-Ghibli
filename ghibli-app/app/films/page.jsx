@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import FilmCard from '@/components/FilmCard';
+import Pagination from '@/components/Pagination';
 
 export default function MisPeliculasPage() {
   const [films, setFilms] = useState([]);
@@ -38,50 +39,58 @@ export default function MisPeliculasPage() {
   };
 
   return (
-    <main className="min-h-screen bg-gray-900 text-white p-6">
-      <h1 className="text-3xl font-bold text-yellow-400 mb-6 text-center uppercase">Mis Películas</h1>
+    <main className="min-h-screen text-white px-4 py-12">
+      <h1 className="text-4xl font-extrabold text-white mb-10 text-center uppercase tracking-wider">
+        Mis Películas
+      </h1>
 
       {editing && (
-        <div className="bg-black border-4 border-yellow-500 rounded-xl p-4 mb-6 max-w-xl mx-auto">
-          <h2 className="text-xl font-bold mb-4">Editar Película</h2>
-          <div className="space-y-3">
+        <div className="bg-[#1b2a40] border border-[#2d74da] rounded-xl p-6 mb-10 max-w-xl mx-auto shadow-xl">
+          <h2 className="text-2xl font-bold text-[#50b4ff] mb-4 text-center uppercase">Editar Película</h2>
+          <div className="space-y-4">
             <input
-              className="w-full p-2 rounded bg-white text-black"
+              className="w-full p-3 rounded-lg bg-[#0f1e2e] text-white border border-[#2d74da]"
               value={editing.title}
               onChange={(e) => setEditing({ ...editing, title: e.target.value })}
               placeholder="Título"
             />
             <input
-              className="w-full p-2 rounded bg-white text-black"
+              className="w-full p-3 rounded-lg bg-[#0f1e2e] text-white border border-[#2d74da]"
               value={editing.director}
               onChange={(e) => setEditing({ ...editing, director: e.target.value })}
               placeholder="Director"
             />
             <input
-              className="w-full p-2 rounded bg-white text-black"
+              className="w-full p-3 rounded-lg bg-[#0f1e2e] text-white border border-[#2d74da]"
               value={editing.year}
               onChange={(e) => setEditing({ ...editing, year: e.target.value })}
               placeholder="Año"
               type="number"
             />
             <textarea
-              className="w-full p-2 rounded bg-white text-black"
+              className="w-full p-3 rounded-lg bg-[#0f1e2e] text-white border border-[#2d74da]"
               value={editing.description}
               onChange={(e) => setEditing({ ...editing, description: e.target.value })}
-              rows={3}
+              rows={4}
               placeholder="Descripción"
             />
             <input
-              className="w-full p-2 rounded bg-white text-black"
+              className="w-full p-3 rounded-lg bg-[#0f1e2e] text-white border border-[#2d74da]"
               value={editing.image}
               onChange={(e) => setEditing({ ...editing, image: e.target.value })}
               placeholder="URL de imagen"
             />
             <div className="flex gap-4 justify-end mt-4">
-              <button onClick={handleSaveEdit} className="bg-yellow-400 text-black px-4 py-2 rounded hover:bg-yellow-300">
+              <button
+                onClick={handleSaveEdit}
+                className="bg-[#50b4ff] text-black px-6 py-2 rounded-lg font-semibold hover:bg-[#7ecfff] transition"
+              >
                 Guardar
               </button>
-              <button onClick={() => setEditing(null)} className="bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-500">
+              <button
+                onClick={() => setEditing(null)}
+                className="bg-gray-600 text-white px-6 py-2 rounded-lg hover:bg-gray-500"
+              >
                 Cancelar
               </button>
             </div>
@@ -90,10 +99,12 @@ export default function MisPeliculasPage() {
       )}
 
       {films.length === 0 ? (
-        <p className="text-center text-gray-400">No has añadido ninguna película aún.</p>
+        <p className="text-center text-gray-300 text-lg mt-16">
+          No has añadido ninguna película aún.
+        </p>
       ) : (
         <>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-12">
             {paginatedFilms.map((film) => (
               <FilmCard
                 key={film.id}
@@ -105,20 +116,12 @@ export default function MisPeliculasPage() {
             ))}
           </div>
 
-          {films.length > 0 && (
-            <div className="flex justify-center mt-8 gap-2">
-              {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-                <button
-                  key={page}
-                  onClick={() => setCurrentPage(page)}
-                  className={`px-3 py-1 rounded ${
-                    currentPage === page ? 'bg-yellow-400 text-black font-bold' : 'bg-gray-700 text-white'
-                  } hover:bg-yellow-300 transition`}
-                >
-                  {page}
-                </button>
-              ))}
-            </div>
+          {films.length > FILMS_PER_PAGE && (
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={setCurrentPage}
+            />
           )}
         </>
       )}
