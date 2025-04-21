@@ -13,7 +13,10 @@ export default function Banner() {
           Explora el Mundo Ghibli
         </h1>
         <p className="text-lg sm:text-xl mb-6 max-w-2xl drop-shadow">
-          Encuentra tus películas favoritas y disfruta del universo mágico de Studio Ghibli.
+          Encuentra tus películas favoritas y disfruta del universo mágico.
+        </p>
+        <p className="text-lg sm:text-xl mb-6 max-w-2xl drop-shadow text-center">
+          Crea y añade tus propias películas para que formen parte del mundo de Studio Ghibli.
         </p>
         <Link
           href="/films"

@@ -26,16 +26,16 @@ export default function MisPeliculasPage() {
     const stored = JSON.parse(localStorage.getItem('ghibli_films')) || [];
 
     const exampleFilm = {
-      id: "ejemplo-programador",
-      title: "La Prueba Técnica",
+      id: "ejemplo-dragon",
+      title: "Kit y el dragon",
       description:
-        "Una historia inspiradora de un joven desarrollador construyendo su futuro en código.",
-      director: "Pere Busquet",
+      "En un mundo donde los elementos gobiernan el equilibrio de la naturaleza, Kit, un niño curioso de 12 años con habilidades elementales innatas, vive en un pequeño pueblo rodeado de bosques ancestrales. Aunque controla el viento y el agua con facilidad, aún no comprende el verdadero alcance de su poder.\n\nDurante una excursión escolar al bosque prohibido, Kit se desvía del grupo tras escuchar un extraño susurro que solo él puede oír. Guiado por esa voz elemental, descubre un enorme huevo brillante oculto entre raíces antiguas, como si el bosque mismo lo protegiera.\n\nDesde ese momento, su destino cambia. El huevo guarda en su interior un dragón legendario vinculado al equilibrio de los elementos, y Kit es el único que puede protegerlo. Pero no está solo: fuerzas oscuras también han sentido el despertar del dragón y harán todo por arrebatárselo.\n\nA lo largo de la historia, Kit deberá ocultar el huevo, aprender a dominar sus poderes, y descubrir su conexión ancestral con los guardianes de los dragones. La relación entre Kit y el dragón que nacerá será clave para restaurar el equilibrio de un mundo que está empezando a desmoronarse.",
+        director: "Eyden Kazama",
       producer: "Buski87",
       year: "2025",
-      image: "/images/chico-programando.png", 
+      image: "/images/kit.png", 
       running_time: "90", 
-      rt_score: "75",
+      rt_score: "75",  
     };
 
     const exists = stored.some((film) => film.id === exampleFilm.id);
