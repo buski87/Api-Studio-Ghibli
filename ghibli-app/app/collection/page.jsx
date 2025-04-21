@@ -163,7 +163,8 @@ export default function MisPeliculasPage() {
         </p>
       ) : (
         <>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-12">
+        <div className="max-w-7xl mx-auto px-4 py-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
             {paginatedFilms.map((film) => (
               <FilmCard
                 key={film.id}
@@ -174,7 +175,7 @@ export default function MisPeliculasPage() {
               />
             ))}
           </div>
-
+          </div>
           {films.length > FILMS_PER_PAGE && (
             <Pagination
               currentPage={currentPage}
