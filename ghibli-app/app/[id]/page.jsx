@@ -4,9 +4,11 @@ import { useEffect, useState } from "react";
 import { getFilmById } from "@/lib/api";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import LoadingSpinner from "@/components/LoadingSpinner"; // Asegúrate de que el path sea correcto
 
 export default function FilmDetailPage({ params }) {
   const [film, setFilm] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -18,9 +20,18 @@ export default function FilmDetailPage({ params }) {
         const localFilm = localFilms.find((f) => f.id === params.id);
         setFilm(localFilm || null);
       }
+      setLoading(false);
     };
     fetchData();
   }, [params.id]);
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-screen bg-gradient-to-b from-[#1f1f1f] via-[#141414] to-[#1f1f1f]">
+        <LoadingSpinner />
+      </div>
+    );
+  }
 
   if (!film) {
     return (
@@ -34,7 +45,7 @@ export default function FilmDetailPage({ params }) {
   }
 
   return (
-    <main className="w-full min-h-screen  text-white p-4 sm:p-6 flex justify-center items-start">
+    <main className="w-full min-h-screen text-white p-4 sm:p-6 flex justify-center items-start">
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
