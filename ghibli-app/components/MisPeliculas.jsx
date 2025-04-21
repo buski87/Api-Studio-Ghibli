@@ -1,20 +1,31 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useSearchParams, useRouter, usePathname } from 'next/navigation';
 import FilmCard from '@/components/FilmCard';
 import Pagination from '@/components/Pagination';
 
-export default function MisPeliculas({ currentPage, onPageChange }) {
+export default function MisPeliculas() {
   const [films, setFilms] = useState([]);
   const [editing, setEditing] = useState(null);
 
-  const FILMS_PER_PAGE = 6;
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
 
+  const FILMS_PER_PAGE = 6;
+  const currentPage = parseInt(searchParams.get("page") || "1", 10);
   const totalPages = Math.ceil(films.length / FILMS_PER_PAGE);
   const paginatedFilms = films.slice(
     (currentPage - 1) * FILMS_PER_PAGE,
     currentPage * FILMS_PER_PAGE
   );
+
+  const handlePageChange = (pageNum) => {
+    const params = new URLSearchParams(searchParams);
+    params.set("page", pageNum);
+    router.push(`${pathname}?${params.toString()}`);
+  };
 
   useEffect(() => {
     const stored = JSON.parse(localStorage.getItem('ghibli_films')) || [];
@@ -89,7 +100,7 @@ export default function MisPeliculas({ currentPage, onPageChange }) {
           ))}
         </div>
         {films.length > FILMS_PER_PAGE && (
-          <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={onPageChange} />
+          <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
         )}
       </div>
     </>
