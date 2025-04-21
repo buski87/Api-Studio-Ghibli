@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { getFilmById } from "@/lib/api";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import LoadingSpinner from "@/components/LoadingSpinner"; // Asegúrate de que el path sea correcto
+import LoadingSpinner from "@/components/LoadingSpinner";
 
 export default function FilmDetailPage({ params }) {
   const [film, setFilm] = useState(null);

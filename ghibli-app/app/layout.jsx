@@ -2,7 +2,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Noto_Serif_JP } from "next/font/google";
-import { FavoritesProvider } from "@/context/FavoritesContext"; // Asegúrate de que la ruta sea correcta
+import { FavoritesProvider } from "@/context/FavoritesContext";
 
 const japaneseFont = Noto_Serif_JP({ subsets: ["latin"], weight: "500" });
 

@@ -31,7 +31,7 @@ body {
   display: block;
   width: 0;
   height: 2px;
-  background: #22d3ee; /* cyan-400 */
+  background: #22d3ee;
   transition: width 0.3s;
 }
 
@@ -39,8 +39,6 @@ body {
   width: 100%;
 }
 
-
-/* styles/flipcard.css */
 .flip-card {
   perspective: 1000px;
 }

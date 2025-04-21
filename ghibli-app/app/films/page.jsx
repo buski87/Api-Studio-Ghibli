@@ -25,7 +25,6 @@ export default function Home({ searchParams }) {
       const apiFilms = await getAllFilms();
       let localFilms = JSON.parse(localStorage.getItem("ghibli_films")) || [];
 
-      // Si no hay películas locales, insertamos la de ejemplo
       if (localFilms.length === 0) {
         const exampleFilm = {
           id: "ejemplo-dragon",

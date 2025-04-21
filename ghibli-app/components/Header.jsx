@@ -44,7 +44,7 @@ export default function Header() {
             <Link
               key={href}
               href={href}
-              onClick={() => setIsOpen(false)} // ✅ Cierra el menú al hacer clic
+              onClick={() => setIsOpen(false)}
               className={`block py-2 relative hover:text-cyan-300 transition ${
                 highlight ? "text-cyan-400" : "text-white"
               }`}

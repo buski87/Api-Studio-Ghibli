@@ -1,5 +1,3 @@
-// src/lib/api.js
-
 const BASE_URL = 'https://ghibliapi.vercel.app'
 
 export async function getAllFilms() {

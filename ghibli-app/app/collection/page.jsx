@@ -50,7 +50,7 @@ export default function MisPeliculasPage() {
   }, []);
 
   const handleDelete = (id) => {
-    if (id === "ejemplo-programador") return; // proteger ejemplo
+    if (id === "ejemplo-programador") return; 
 
     const updated = films.filter((film) => film.id !== id);
     localStorage.setItem('ghibli_films', JSON.stringify(updated));
