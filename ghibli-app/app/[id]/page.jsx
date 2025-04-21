@@ -65,10 +65,10 @@ export default function FilmDetailPage({ params }) {
 
           <div className="mt-6 flex justify-center md:justify-start">
             <Link
-              href="/"
+              href="/films"
               className="bg-[#50b4ff] text-black px-5 py-2 rounded-lg font-semibold hover:bg-[#7ecfff] transition text-sm"
             >
-              ← Volver al inicio
+              ← Volver a películas
             </Link>
           </div>
         </div>
