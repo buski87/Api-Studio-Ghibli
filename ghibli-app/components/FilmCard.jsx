@@ -1,8 +1,23 @@
+'use client';
+
 import Link from "next/link";
+import { useFavorites } from "@/context/FavoritesContext";
 
 export default function FilmCard({ film, editable = false, onEdit, onDelete }) {
+  const { favorites, toggleFavorite } = useFavorites();
+  const isFav = favorites.some((f) => f.id === film.id);
+
   return (
-    <div className="flip-card w-full max-w-xs mx-auto transition-transform hover:scale-[1.02]">
+    <div className="flip-card w-full max-w-xs mx-auto transition-transform hover:scale-[1.02] relative">
+      <button
+        onClick={() => toggleFavorite(film)}
+        className="absolute top-2 right-2 text-2xl z-20"
+        aria-label="Favorito"
+        title="Añadir a favoritos"
+      >
+        {isFav ? "❤️" : "🤍"}
+      </button>
+
       <div className="flip-inner relative w-full h-[460px]">
         {/* Parte frontal */}
         <div className="flip-front absolute w-full h-full bg-gradient-to-b from-[#1c1c1e] to-[#0d0d0e] text-white rounded-xl overflow-hidden shadow-2xl border border-cyan-500">

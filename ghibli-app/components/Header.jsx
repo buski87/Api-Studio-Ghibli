@@ -11,6 +11,7 @@ export default function Header() {
     { href: "/films", label: "Películas" },
     { href: "/form", label: "Añadir Película" },
     { href: "/collection", label: "Mis Películas" },
+    { href: "/favorites", label: "Favoritas" },
     { href: "/faqs", label: "FAQS", highlight: true },
   ];
 
