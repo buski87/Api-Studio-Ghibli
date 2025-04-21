@@ -40,6 +40,7 @@ export default function NewFilmPage() {
     setForm({
       title: '',
       director: '',
+      producer: '', 
       year: '',
       duration: '',
       rt_score: '',
@@ -77,7 +78,15 @@ export default function NewFilmPage() {
               required
             />
           </div>
-
+          <div className="flex flex-col">
+            <label className="mb-1 text-sm font-semibold text-gray-300">Productor</label>
+            <input
+              name="producer"
+              value={form.producer}
+              onChange={handleChange}
+              className="p-3 rounded-lg bg-[#0f2a40] text-white border border-[#50b4ff]"
+            />
+          </div>
           <div className="flex flex-col md:flex-row md:gap-4">
             <div className="flex flex-col flex-1">
               <label className="mb-1 text-sm font-semibold text-gray-300">Año *</label>

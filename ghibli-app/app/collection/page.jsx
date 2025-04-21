@@ -24,10 +24,34 @@ export default function MisPeliculasPage() {
 
   useEffect(() => {
     const stored = JSON.parse(localStorage.getItem('ghibli_films')) || [];
-    setFilms(stored);
+
+    const exampleFilm = {
+      id: "ejemplo-programador",
+      title: "La Prueba Técnica",
+      description:
+        "Una historia inspiradora de un joven desarrollador construyendo su futuro en código.",
+      director: "Pere Busquet",
+      producer: "Buski87",
+      year: "2025",
+      image: "/images/chico-programando.png", 
+      running_time: "90", 
+      rt_score: "75",
+    };
+
+    const exists = stored.some((film) => film.id === exampleFilm.id);
+
+    if (!exists) {
+      const updated = [exampleFilm, ...stored];
+      localStorage.setItem("ghibli_films", JSON.stringify(updated));
+      setFilms(updated);
+    } else {
+      setFilms(stored);
+    }
   }, []);
 
   const handleDelete = (id) => {
+    if (id === "ejemplo-programador") return; // proteger ejemplo
+
     const updated = films.filter((film) => film.id !== id);
     localStorage.setItem('ghibli_films', JSON.stringify(updated));
     setFilms(updated);
@@ -74,11 +98,34 @@ export default function MisPeliculasPage() {
             />
             <input
               className="w-full p-3 rounded-lg bg-[#0f1e2e] text-white border border-[#2d74da]"
+              value={editing.producer || ""}
+              onChange={(e) => setEditing({ ...editing, producer: e.target.value })}
+              placeholder="Productor"
+            />
+            <input
+              className="w-full p-3 rounded-lg bg-[#0f1e2e] text-white border border-[#2d74da]"
               value={editing.year}
               onChange={(e) => setEditing({ ...editing, year: e.target.value })}
               placeholder="Año"
               type="number"
             />
+            <input
+                className="w-full p-3 rounded-lg bg-[#0f1e2e] text-white border border-[#2d74da]"
+                value={editing.running_time}
+                onChange={(e) =>
+                  setEditing({ ...editing, running_time: e.target.value })
+                }
+                placeholder="Duración (minutos)"
+                type="number"
+              />
+
+              <input
+                className="w-full p-3 rounded-lg bg-[#0f1e2e] text-white border border-[#2d74da]"
+                value={editing.rt_score}
+                onChange={(e) => setEditing({ ...editing, rt_score: e.target.value })}
+                placeholder="Puntuación Rotten Tomatoes"
+                type="number"
+              />
             <textarea
               className="w-full p-3 rounded-lg bg-[#0f1e2e] text-white border border-[#2d74da]"
               value={editing.description}

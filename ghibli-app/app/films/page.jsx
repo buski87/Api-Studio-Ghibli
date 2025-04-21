@@ -23,7 +23,26 @@ export default function Home({ searchParams }) {
   useEffect(() => {
     const loadFilms = async () => {
       const apiFilms = await getAllFilms();
-      const localFilms = JSON.parse(localStorage.getItem("ghibli_films")) || [];
+      let localFilms = JSON.parse(localStorage.getItem("ghibli_films")) || [];
+
+      // Si no hay películas locales, insertamos la de ejemplo
+      if (localFilms.length === 0) {
+        const exampleFilm = {
+          id: "ejemplo-programador",
+      title: "La Prueba Técnica",
+      description:
+        "Una historia inspiradora de un joven desarrollador construyendo su futuro en código.",
+      director: "Pere Busquet",
+      producer: "Buski87",
+      year: "2025",
+      image: "/images/chico-programando.png", 
+      running_time: "90", 
+      rt_score: "75",  
+        };
+
+        localFilms = [exampleFilm];
+        localStorage.setItem("ghibli_films", JSON.stringify(localFilms));
+      }
 
       const combined = [...localFilms, ...apiFilms].sort((a, b) => {
         const yearA = parseInt(a.release_date || a.year, 10);
@@ -34,7 +53,6 @@ export default function Home({ searchParams }) {
       setAllFilms(combined);
       setFilteredFilms(combined);
 
-    
       const uniqueYears = [
         ...new Set(
           combined
@@ -43,7 +61,6 @@ export default function Home({ searchParams }) {
         ),
       ].sort((a, b) => b - a);
 
-    
       const uniqueDirectors = [
         ...new Set(combined.map((f) => f.director).filter(Boolean)),
       ].sort();
@@ -95,7 +112,7 @@ export default function Home({ searchParams }) {
           />
         </div>
       </section>
-      
+
       <div className="max-w-7xl mx-auto px-4 py-12">
         {loading ? (
           <LoadingSpinner />
@@ -105,13 +122,11 @@ export default function Home({ searchParams }) {
           </p>
         ) : (
           <>
-         
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
               {filmsToShow.map((film) => (
                 <FilmCard key={film.id} film={film} />
               ))}
             </div>
-           
             <Pagination currentPage={page} totalPages={totalPages} />
           </>
         )}
