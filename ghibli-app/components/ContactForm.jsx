@@ -21,12 +21,15 @@ export default function ContactForm() {
       )
       .then(
         () => {
-          setStatus("Mensaje enviado correctamente.");
           formRef.current.reset();
+          setStatus("Mensaje enviado correctamente.");
+          // Ocultar el mensaje después de 4 segundos
+          setTimeout(() => setStatus(""), 4000);
         },
         (error) => {
           console.error("Error:", error.text);
           setStatus("Error al enviar el mensaje.");
+          setTimeout(() => setStatus(""), 4000);
         }
       );
   };
@@ -69,7 +72,6 @@ export default function ContactForm() {
         {status && <p className="text-sm text-center text-cyan-300 mt-2">{status}</p>}
       </form>
 
-      {/* Iconos de contacto */}
       <div className="pt-6 flex justify-center gap-6 text-cyan-400 text-2xl">
         <a
           href="https://github.com/buski87"

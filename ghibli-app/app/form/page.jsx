@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import AnimatedConstructionImage from '@/components/AnimatedConstructionImage';
 
 export default function NewFilmPage() {
   const [form, setForm] = useState({
@@ -56,43 +57,30 @@ export default function NewFilmPage() {
 
         {/* Columna izquierda */}
         <div className="w-full lg:w-1/2 space-y-10">
-          <div className="bg-[#0e1e2e] border border-cyan-500 rounded-xl p-6 shadow-xl text-white">
-            <h3 className="text-xl font-bold text-cyan-400 mb-4 uppercase text-center">
-              🧪 Ejemplo de Película
-            </h3>
-            <div className="flex flex-col md:flex-row gap-4 items-center">
-              <img
-                src="/images/kit.png"
-                alt="Kit y el dragón"
-                className="w-full md:w-48 rounded-lg shadow"
-              />
-              <div className="text-sm text-gray-300 space-y-1">
-                <p><strong>Título:</strong> Kit y el dragón</p>
-                <p><strong>Director:</strong> Eyden Kazama</p>
-                <p><strong>Productor:</strong> Buski87</p>
-                <p><strong>Año:</strong> 2025</p>
-                <p><strong>Duración:</strong> 90 minutos</p>
-                <p><strong>Rotten Score:</strong> 75</p>
-                <p><strong>Descripción:</strong> Una historia épica sobre un niño con poderes elementales y un huevo de dragón escondido en el bosque.</p>
-              </div>
-            </div>
-          </div>
-
+        
           <div className="bg-[#0e1e2e] border border-yellow-400 rounded-xl p-6 shadow-xl text-white">
             <h3 className="text-xl font-bold text-yellow-300 mb-4 uppercase text-center">
-              ✨ ¡Crea tu propia película!
+            ✨ ¡Crea tu propia película!
             </h3>
-            <p className="text-sm text-gray-300 text-center mb-4">
-              Puedes inventar tu historia, añadir un título original, y completar todos los campos como si fueras parte del Studio Ghibli.
-              Es una oportunidad perfecta para soñar con tu propia producción animada.
-            </p>
-            <ul className="text-sm text-gray-300 list-disc list-inside">
-              <li>Puedes usar una imagen desde una URL externa</li>
-              <li>Recomendamos usar imágenes tipo <strong>PNG o JPG</strong> y de al menos <strong>300x400 px</strong>.</li>
-              <li>También puedes usar imágenes locales como la chica explorando <code>/images/explorer.png</code></li>
+            <AnimatedConstructionImage />
+            
+            <ul className="text-sm text-gray-300 list-disc list-inside space-y-1 py-4">
+              <li><strong>Piensa en un título:</strong> ¿Una aventura mágica? ¿Un dragón perdido? ¿Un bosque encantado?</li>
+              <li><strong>Inventa personajes:</strong> Un héroe, una criatura, una misión... ¡tú mandas!</li>
+              <li><strong>Escribe una sinopsis:</strong> Resume tu historia en unas líneas con alma y emoción.</li>
+              <li><strong>Sube una imagen:</strong> Puedes usar:
+                <ul className="ml-5 list-disc">
+                  <li>Una <code>URL externa</code> como <code>https://i.imgur.com/xyz123.jpg</code></li>
+                  <li>Una imagen local como <code>/images/explorer.png</code> o <code>/images/kit.png</code></li>
+                </ul>
+              </li>
+              <li><strong>Recomendación:</strong> Imágenes PNG o JPG de al menos <strong>500x300 px</strong>.</li>
             </ul>
+            <p className="text-sm text-cyan-400 text-center mt-4 font-semibold">
+              🎬 Mi película Kit y el dragón , ya esta disponible.
+            </p>
             <p className="text-sm text-yellow-200 text-center mt-4 font-semibold">
-              ¡Anímate a crear una película y verla listada junto a las del Studio Ghibli!
+              ¡Dale vida a tu historia y mira cómo aparece junto a los clásicos del Studio Ghibli!
             </p>
           </div>
         </div>
