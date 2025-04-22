@@ -45,13 +45,13 @@ export default function FilmDetailPage({ params }) {
   }
 
   return (
-    <main className="w-full min-h-screen text-white p-4 sm:p-6 flex justify-center items-start">
-      <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="w-full max-w-5xl bg-[#121f30] rounded-xl shadow-2xl border border-[#2d74da] overflow-hidden flex flex-col md:flex-row"
-      >
+    <main className="w-full min-h-screen text-white px-4 py-12 flex justify-center items-center">
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="w-full max-w-3xl bg-[#121f30] rounded-xl shadow-2xl border border-[#2d74da] overflow-hidden flex flex-col md:flex-row"
+    >
         <img
           src={film.image}
           alt={film.title}

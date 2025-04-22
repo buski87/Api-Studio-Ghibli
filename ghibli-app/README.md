@@ -4,25 +4,27 @@ Este es un proyecto web creado con [Next.js 14](https://nextjs.org/) que simula 
 
 ## 🚀 Tecnologías Usadas
 
-- **Next.js 14** + App Router
+ **Next.js 14** (App Router)
 - **React** + Hooks
 - **Tailwind CSS** para el diseño y responsividad
-- **Framer Motion** para animaciones
-- **LocalStorage** para persistencia local de películas creadas
+- **Framer Motion** para animaciones suaves
+- **EmailJS** para contacto funcional
+- **LocalStorage** para persistencia local
 - **API externa de Studio Ghibli**
 
 ## ✨ Funcionalidades Principales
 
-- 🎞️ Listado de películas con paginación y filtros por director, año y búsqueda.
-- 📥 Añadir tus propias películas con formulario validado.
-- ✏️ Editar y eliminar películas guardadas desde la sección "Mis películas".
-- ❤️ Añadir y gestionar películas favoritas.
-- 🧠 Sistema de ejemplo precargado para mostrar la funcionalidad si no hay datos en local.
-- 🔍 Filtros combinados con búsqueda por título.
-- 📱 Diseño totalmente responsive (mobile-first).
-- 📂 Acordeón de FAQs con diseño moderno.
-- 🖼️ Banner animado estilo Studio Ghibli con llamada a la acción.
-- ⏳ Spinner de carga mientras se cargan los datos o la vista de detalle.
+- 🎞️ Listado de películas con paginación, filtros y búsqueda por título.
+- 📥 Añadir tus propias películas con formulario guiado e inspiración visual.
+- ✏️ Editar y eliminar películas desde "Mis Películas".
+- ❤️ Marcar favoritas y acceder a ellas desde "Favoritos".
+- 💾 Persistencia en `localStorage` sin backend.
+- 🧠 Sistema de ejemplo precargado (como "Kit y el dragón").
+- 📱 Diseño mobile-first, totalmente responsive.
+- 🖼️ Imagen ilustrativa al estilo Studio Ghibli para animarte a crear.
+- ⚙️ Spinner de carga mientras se cargan los datos o detalle.
+- 📫 Formulario de contacto funcional (EmailJS) + iconos de GitHub y LinkedIn.
+- ❓ Sección de FAQ con diseño tipo acordeón.
 
 ## 🛠️ Instalación y Uso
 
@@ -62,17 +64,18 @@ npm run lint    # Ejecuta ESLint para análisis de código
 
 ```
 /app
-  /films          # Página con todas las películas
-  /[id]           # Página de detalle de la película
-  /form           # Formulario para añadir películas
-  /collection     # Tus películas guardadas (Mis Películas)
-  /favorites      # Tus películas preferidas
-  /faqs           # Preguntas frecuentes
-/components       # Componentes reutilizables (FilmCard, Header, Footer...)
-/lib              # Lógica de conexión con la API
-/public/images    # Recursos gráficos e imágenes
-```
+  /films         → Listado de películas
+  /[id]          → Detalle de cada película
+  /form          → Formulario para crear nuevas películas
+  /collection    → Sección "Mis Películas" (localStorage)
+  /favorites     → Favoritos
+  /contact       → Formulario de contacto
+  /faqs          → Preguntas frecuentes
+/components      → Reutilizables (FilmCard, Header, Footer, LoadingSpinner...)
+/public/images   → Imágenes locales como ejemplo
+/lib             → Lógica de conexión a la API
 
+```
 ## 📤 Despliegue
 
 Este proyecto está optimizado para ser desplegado fácilmente en [Vercel](https://vercel.com).
@@ -83,4 +86,4 @@ Este proyecto está optimizado para ser desplegado fácilmente en [Vercel](https
 
 ---
 
-¡Explora, crea y guarda tus películas favoritas como si formaras parte del mundo de Studio Ghibli! 🍃✨
+¡Explora, crea y guarda tus películas favoritas como si formaras parte del mundo de Studio Ghibli!

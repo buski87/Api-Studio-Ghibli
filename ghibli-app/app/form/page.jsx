@@ -59,9 +59,7 @@ export default function NewFilmPage() {
         <div className="w-full lg:w-1/2 space-y-10">
         
           <div className="bg-[#0e1e2e] border border-yellow-400 rounded-xl p-6 shadow-xl text-white">
-            <h3 className="text-xl font-bold text-yellow-300 mb-4 uppercase text-center">
-            ✨ ¡Crea tu propia película!
-            </h3>
+            
             <AnimatedConstructionImage />
             
             <ul className="text-sm text-gray-300 list-disc list-inside space-y-1 py-4">
