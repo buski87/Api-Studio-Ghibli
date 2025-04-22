@@ -1,5 +1,7 @@
-import { Suspense } from "react";
-import dynamic from "next/dynamic";
+'use client';
+
+import dynamic from 'next/dynamic';
+import { Suspense } from 'react';
 
 const FilmsContent = dynamic(() => import('@/components/FilmsContent'), { ssr: false });
 
