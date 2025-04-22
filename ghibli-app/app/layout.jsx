@@ -7,7 +7,7 @@ import { FavoritesProvider } from "@/context/FavoritesContext";
 const japaneseFont = Noto_Serif_JP({ subsets: ["latin"], weight: "500" });
 
 export const metadata = {
-  title: "Studio Ghibli Explorer",
+  title: "Studio Ghibli Films",
   description: "Explora películas con Next.js y la Ghibli API",
 };
 
