@@ -1,5 +1,7 @@
 import { Suspense } from "react";
-import FilmsContent from "@/components/FilmsContent";
+import dynamic from "next/dynamic";
+
+const FilmsContent = dynamic(() => import('@/components/FilmsContent'), { ssr: false });
 
 export default function FilmsPage() {
   return (
