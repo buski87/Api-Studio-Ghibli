@@ -47,12 +47,17 @@ export default function FilmsContent() {
         localStorage.setItem("ghibli_films", JSON.stringify(localFilms));
       }
 
-      const combined = [...localFilms, ...apiFilms];
+      const combined = [...localFilms, ...apiFilms].sort((a, b) => {
+        const yearA = parseInt(a.year || a.release_date);
+        const yearB = parseInt(b.year || b.release_date);
+        return yearA - yearB;
+      });
+
+      setAllFilms(combined);
 
       const years = [...new Set(combined.map(f => parseInt(f.year || f.release_date)).filter(Boolean))].sort((a, b) => b - a);
       const directors = [...new Set(combined.map(f => f.director).filter(Boolean))].sort();
 
-      setAllFilms(combined);
       setAvailableYears(years);
       setAvailableDirectors(directors);
       setLoading(false);
@@ -63,19 +68,26 @@ export default function FilmsContent() {
 
   useEffect(() => {
     let result = [...allFilms];
+
     if (filters.search) {
-      result = result.filter(f => f.title.toLowerCase().includes(filters.search.toLowerCase()));
+      result = result.filter(f =>
+        f.title.toLowerCase().includes(filters.search.toLowerCase())
+      );
     }
+
     if (filters.director) {
       result = result.filter(f => f.director === filters.director);
     }
+
     if (filters.year) {
-      result = result.filter(f => String(f.year || f.release_date) === filters.year);
+      result = result.filter(
+        f => String(f.year || f.release_date) === filters.year
+      );
     }
 
     result.sort((a, b) => {
-      const yearA = parseInt(a.year || a.release_date, 10);
-      const yearB = parseInt(b.year || b.release_date, 10);
+      const yearA = parseInt(a.year || a.release_date);
+      const yearB = parseInt(b.year || b.release_date);
       return yearA - yearB;
     });
 
@@ -118,7 +130,7 @@ export default function FilmsContent() {
         ) : (
           <>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-              {filmsToShow.map((film) => (
+              {filmsToShow.map(film => (
                 <FilmCard key={film.id} film={film} />
               ))}
             </div>
